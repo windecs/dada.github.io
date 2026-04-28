@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Таймер до лета и ссылки</title>
+    <title>Таймер: До начала лагеря</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,20 +15,20 @@
             margin: 0;
             padding: 20px;
         }
-        h1 { color: #2c3e50; margin-bottom: 30px; text-align: center; }
+        h1 { color: #2c3e50; margin-bottom: 30px; text-align: center; font-size: 1.8rem; }
         
         /* Таймер */
-        .timer { display: flex; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; justify-content: center; }
+        .timer { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; justify-content: center; }
         .unit {
             background: #fff;
-            padding: 20px;
+            padding: 15px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            min-width: 90px;
+            min-width: 80px;
             text-align: center;
         }
-        .num { display: block; font-size: 3rem; font-weight: 800; color: #3498db; }
-        .text { color: #7f8c8d; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+        .num { display: block; font-size: 2.5rem; font-weight: 800; color: #3498db; }
+        .text { color: #7f8c8d; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
 
         /* Кнопки */
         .buttons-container {
@@ -36,31 +36,32 @@
             flex-direction: column;
             gap: 15px;
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
         }
         .btn {
             display: block;
             text-align: center;
-            padding: 18px 25px;
+            padding: 16px 20px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             color: white;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            filter: brightness(1.1);
         }
-        .btn-form { background: #673ab7; } /* Фиолетовый для формы */
-        .btn-site { background: #2ecc71; } /* Зеленый для лагеря */
+        .btn-form { background: #673ab7; }
+        .btn-site { background: #2ecc71; }
     </style>
 </head>
 <body>
 
-    <h1>До начала лагеря осталось:</h1>
+    <h1>До лагеря осталось:</h1>
 
     <div class="timer">
         <div class="unit"><span class="num" id="days">00</span><span class="text">Дней</span></div>
@@ -71,23 +72,28 @@
 
     <div class="buttons-container">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6FG6SKWS6WzCgU0RGZYeTMl637fCiO9BMUG7FuREg-OPk5g/viewform" target="_blank" class="btn btn-form">
-            📝 Заполнить форму
+            📝 Записаться через форму
         </a>
         <a href="https://ayelatvia.lv/dnevnojlager" target="_blank" class="btn btn-site">
-            🏕 Дневной лагерь
+            🏕 Подробнее о лагере
         </a>
     </div>
 
     <script>
         function updateTimer() {
-            const now = new Date();
-            let target = new Date(now.getFullYear(), 5, 1);
-            if (now > target) target = new Date(now.getFullYear() + 1, 5, 1);
-
+            // Установка конкретной даты: Год, Месяц (0-11), Число, Часы, Минуты
+            const target = new Date(2026, 5, 1, 9, 59, 0).getTime();
+            const now = new Date().getTime();
             const diff = target - now;
+
+            if (diff <= 0) {
+                document.querySelector(".timer").innerHTML = "<h2>Смена началась!</h2>";
+                return;
+            }
+
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const m = Math.floor((diff / 1000 / 60) % 60);
+            const m = Math.floor((diff / (1000 * 60)) % 60);
             const s = Math.floor((diff / 1000) % 60);
 
             document.getElementById('days').innerText = d;
@@ -95,6 +101,7 @@
             document.getElementById('mins').innerText = m < 10 ? '0' + m : m;
             document.getElementById('secs').innerText = s < 10 ? '0' + s : s;
         }
+
         setInterval(updateTimer, 1000);
         updateTimer();
     </script>
