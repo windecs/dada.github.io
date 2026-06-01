@@ -110,19 +110,158 @@
 </html>
 
 
-<h1> Расписание
-08:00 – 09:00
-Сбор участников, разделение на группы
-09:00 – 12:00
-Первый блок занятий
-12:00 – 12:45
-Обед
-13:00 – 14:30
-Второй блок занятий
-14:30 – 16:00
-Прогулка ,спортивные мероприятия и игры на свежем воздухе
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
 
-*с учетом погодных условий
-16:00-17:00
-Время настольных игр, общения
-Завершение программы дня<h1>
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Контейнер для всего таймлайна */
+        .timeline {
+            position: relative;
+            padding: 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        /* Вертикальная серая линия */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            bottom: 5px;
+            left: 115px; /* Положение линии относительно времени */
+            width: 1px;
+            background-color: #ccc;
+        }
+
+        /* Элемент списка (строка расписания) */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 45px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        /* Блок с временем */
+        .time {
+            width: 90px;
+            font-size: 14px;
+            color: #000;
+            text-align: right;
+            padding-right: 25px;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        /* Общие стили для круглых маркеров */
+        .marker {
+            position: absolute;
+            left: 111px; /* Центрирование по линии */
+            top: 4px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #fff;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        /* Белый маркер с контуром */
+        .marker.empty {
+            border: 1px solid #ccc;
+        }
+
+        /* Черный закрашенный маркер */
+        .marker.filled {
+            background-color: #000;
+            border: 1px solid #000;
+        }
+
+        /* Блок с описанием события */
+        .content {
+            padding-left: 25px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        /* Дополнительный мелкий текст (примечание) */
+        .note {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <ul class="timeline">
+        <!-- 1 -->
+        <li class="timeline-item">
+            <div class="time">08:00 – 09:00</div>
+            <div class="marker empty"></div>
+            <div class="content">Сбор участников, разделение на группы</div>
+        </li>
+        
+        <!-- 2 -->
+        <li class="timeline-item">
+            <div class="time">09:00 – 12:00</div>
+            <div class="marker filled"></div>
+            <div class="content">Первый блок занятий</div>
+        </li>
+        
+        <!-- 3 -->
+        <li class="timeline-item">
+            <div class="time">12:00 – 12:45</div>
+            <div class="marker filled"></div>
+            <div class="content">Обед</div>
+        </li>
+        
+        <!-- 4 -->
+        <li class="timeline-item">
+            <div class="time">13:00 – 14:30</div>
+            <div class="marker filled"></div>
+            <div class="content">Второй блок занятий</div>
+        </li>
+        
+        <!-- 5 -->
+        <li class="timeline-item">
+            <div class="time">14:30 – 16:00</div>
+            <div class="marker empty"></div>
+            <div class="content">
+                Прогулка, спортивные мероприятия и игры на свежем воздухе
+                <div class="note">*с учетом погодных условий</div>
+            </div>
+        </li>
+        
+        <!-- 6 -->
+        <li class="timeline-item">
+            <div class="time">16:00 – 17:00</div>
+            <div class="marker empty"></div>
+            <div class="content">
+                Время настольных игр, общения<br>Завершение программы дня
+            </div>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
+
